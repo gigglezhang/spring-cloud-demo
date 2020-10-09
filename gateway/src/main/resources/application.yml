@@ -1,0 +1,29 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    gateway:
+      routes:
+#      - id: customer1
+#        uri: lb://customer/
+#        predicates:
+#        - Path=/customer/**
+#        filters:
+#        - StripPrefix=1
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+    nacos:
+      discovery:
+        group: example
+        server-addr: localhost:8848
+        namespace: 288e804d-c89b-4745-9eef-f0310d9025b2
+        cluster-name: example
+  application:
+    name: gateway
+  sleuth:
+    sampler:
+      rate: 100
+  zipkin:
+    base-url: http://localhost:9411/

@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: customer
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        group: example
+        namespace: 288e804d-c89b-4745-9eef-f0310d9025b2
+      discovery:
+        namespace: 288e804d-c89b-4745-9eef-f0310d9025b2
+        group: example
+        cluster-name: example
+        server-addr: 127.0.0.1:8848
+  sleuth:
+    sampler:
+      rate: 100
+  zipkin:
+    base-url: http://localhost:9411/
+
+dubbo:
+  application:
+    name: d_provider
+  registry:
+    address: nacos://localhost:8848
+    group: example
+    parameters:
+      namespace: 288e804d-c89b-4745-9eef-f0310d9025b2
+  provider:
+    cluster: example
+    filter: tracing
+  consumer:
+    cluster: example
+    filter: tracing
+server:
+  port: 8778
