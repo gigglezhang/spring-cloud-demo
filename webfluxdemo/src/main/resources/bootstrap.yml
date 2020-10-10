@@ -5,7 +5,7 @@ spring:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
         group: example
-#        cluster-name: example
+        #        cluster-name: example
         namespace: 288e804d-c89b-4745-9eef-f0310d9025b2
       discovery:
         namespace: 288e804d-c89b-4745-9eef-f0310d9025b2

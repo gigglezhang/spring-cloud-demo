@@ -8,6 +8,7 @@ import com.jc.dubbo.pojo.User;
 public interface MockUser {
     /**
      * get fake user
+     *
      * @return User faked
      */
     User getFakeUser();

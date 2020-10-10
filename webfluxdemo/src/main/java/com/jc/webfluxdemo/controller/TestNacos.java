@@ -13,17 +13,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope  //用于动态刷新配置
 public class TestNacos {
 
-//    @Value(value = "${nacos.str1}")
+    //    @Value(value = "${nacos.str1}")
     private String str1;
 
 
     @GetMapping("/showConfig")
-    public String showConfig(){
+    public String showConfig() {
         return str1;
     }
 
     @GetMapping("/provider/echo/{str}")
-    public String echo(@PathVariable String str){
+    public String echo(@PathVariable String str) {
         return "this is your echo" + str;
     }
 }

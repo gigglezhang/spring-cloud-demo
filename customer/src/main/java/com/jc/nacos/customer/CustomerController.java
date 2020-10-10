@@ -20,12 +20,12 @@ public class CustomerController {
     MockUser mockUser;
 
     @GetMapping("/testCustomer/{str}")
-    public String echo(@PathVariable String str){
+    public String echo(@PathVariable String str) {
         return testEcho.echo(str);
     }
 
     @GetMapping("/testMockUser")
-    public User testMockUser(){
+    public User testMockUser() {
         return mockUser.getFakeUser();
     }
 }

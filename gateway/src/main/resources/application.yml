@@ -4,12 +4,12 @@ spring:
   cloud:
     gateway:
       routes:
-#      - id: customer1
-#        uri: lb://customer/
-#        predicates:
-#        - Path=/customer/**
-#        filters:
-#        - StripPrefix=1
+      #      - id: customer1
+      #        uri: lb://customer/
+      #        predicates:
+      #        - Path=/customer/**
+      #        filters:
+      #        - StripPrefix=1
       discovery:
         locator:
           enabled: true

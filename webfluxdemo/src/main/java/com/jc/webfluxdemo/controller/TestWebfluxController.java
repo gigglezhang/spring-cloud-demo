@@ -27,7 +27,7 @@ public class TestWebfluxController {
 
 
     @GetMapping("/hello")
-    public String hello(){
+    public String hello() {
         log.info("begin ------- normal");
         String result = createStr();
         log.info("end ----------- normal");
@@ -35,7 +35,7 @@ public class TestWebfluxController {
     }
 
     @GetMapping("/helloUser")
-    public Mono<String> helloUser(){
+    public Mono<String> helloUser() {
         log.info("begin -------  webFlux");
         Mono<String> mono = Mono.fromSupplier(this::createStr);
         log.info("end ----------- webFlux");
@@ -43,9 +43,9 @@ public class TestWebfluxController {
     }
 
     @GetMapping(value = "/testPush", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<String> testPush(){
+    public Flux<String> testPush() {
         log.info("begin -------  webFlux");
-        Flux<String> result = Flux.fromStream(IntStream.range(1, 5).mapToObj( i ->{
+        Flux<String> result = Flux.fromStream(IntStream.range(1, 5).mapToObj(i -> {
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {

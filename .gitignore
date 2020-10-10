@@ -1,14 +1,11 @@
 HELP.md
-.mvn/
 target/
-
+.mvn/
 #!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
 ### STS ###
-mvnw
-mvnw.cmd
 .apt_generated
 .classpath
 .factorypath
@@ -22,6 +19,8 @@ mvnw.cmd
 *.iws
 *.iml
 *.ipr
+mvnw
+mvnw.cmd
 
 ### NetBeans ###
 /nbproject/private/
@@ -29,7 +28,7 @@ mvnw.cmd
 /dist/
 /nbdist/
 /.nb-gradle/
-**/build/
+build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 

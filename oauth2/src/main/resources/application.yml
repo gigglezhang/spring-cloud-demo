@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: oauth2
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        group: example
+        namespace: 288e804d-c89b-4745-9eef-f0310d9025b2
+        cluster-name: example
+  redis:
+    host: 10.1.21.56
+    timeout: 10s
+    lettuce:
+      pool:
+        max-active: 9
+        max-idle: 5
+        min-idle: 1
+    password: fubon
