@@ -33,7 +33,7 @@ public class MockUserDetailServiceImpl implements UserDetailsService {
         String role = "ROLE_ADMIN";
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority(role));
-        String password = passwordEncoder.encode("123456");
+        String password = passwordEncoder.encode("654321");
         return new User(s, password,authorities);
     }
 }

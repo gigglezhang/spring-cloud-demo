@@ -4,6 +4,7 @@ import com.jc.dubbo.pojo.User;
 import com.jc.dubbo.service.MockUser;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +26,7 @@ public class CustomerController {
     }
 
     @GetMapping("/testMockUser")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN1')")
     public User testMockUser() {
         return mockUser.getFakeUser();
     }

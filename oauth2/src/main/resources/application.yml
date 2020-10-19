@@ -8,6 +8,7 @@ spring:
         group: example
         namespace: 288e804d-c89b-4745-9eef-f0310d9025b2
         cluster-name: example
+        enabled: false
   redis:
     host: 10.1.21.56
     timeout: 10s
@@ -17,3 +18,6 @@ spring:
         max-idle: 5
         min-idle: 1
     password: fubon
+
+server:
+  port: 8666

@@ -35,3 +35,15 @@ dubbo:
     filter: tracing
 server:
   port: 8778
+security:
+  oauth2:¡£
+    client:
+      client-id: customer
+      client-secret: customer-secret-8888
+      user-authorization-uri: http://localhost:8666/oauth/authorize
+      access-token-uri: http://localhost:8666/oauth/token
+    resource:
+      id: customer
+      user-info-uri: user-info
+    authorization:
+      check-token-access: http://localhost:8666/oauth/check_token
