@@ -8,4 +8,6 @@ import com.jc.springsecurity.pojo.entity.User;
 public interface UserService {
     User createUser(User user);
     User findById(Long Id);
+    User updateUser(User user);
+    void deleteUser(Long id);
 }
