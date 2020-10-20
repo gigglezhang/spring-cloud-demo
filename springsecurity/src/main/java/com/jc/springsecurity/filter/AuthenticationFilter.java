@@ -2,8 +2,10 @@ package com.jc.springsecurity.filter;
 
 import com.jc.springsecurity.jpa.UserRepository;
 import com.jc.springsecurity.pojo.entity.User;
+import com.lambdaworks.crypto.SCryptUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,6 +20,7 @@ import java.util.Base64;
 /**
  * @author xiaok
  */
+@Order(2)
 @Component
 public class AuthenticationFilter extends OncePerRequestFilter {
 
@@ -36,7 +39,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
             String username = items[0];
             String password = items[1];
             User user = userRepository.findByUsername(username);
-            if(user != null && StringUtils.equals(user.getPassword(),password)){
+            if(user != null && SCryptUtil.check(password, user.getPassword())){
                 // 有认证的加入request,方便进入下一步
                 request.setAttribute("user", user);
             }

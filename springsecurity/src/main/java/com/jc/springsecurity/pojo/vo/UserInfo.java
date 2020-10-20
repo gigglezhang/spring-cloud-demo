@@ -2,7 +2,12 @@ package com.jc.springsecurity.pojo.vo;
 
 import com.jc.springsecurity.pojo.entity.User;
 import lombok.Data;
+import org.hibernate.annotations.Columns;
+import org.hibernate.annotations.NotFound;
 import org.springframework.beans.BeanUtils;
+import org.springframework.validation.annotation.Validated;
+
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author jincheng.zhang
@@ -11,7 +16,9 @@ import org.springframework.beans.BeanUtils;
 
 public class UserInfo {
     private Long id;
+    @NotBlank(message = "username 不能为空")
     private String username;
+    @NotBlank(message = "密码不能为空")
     private String password;
     private String age;
     private String description;
@@ -21,7 +28,7 @@ public class UserInfo {
             return null;
         }
         UserInfo userInfo = new UserInfo();
-        BeanUtils.copyProperties(user, userInfo);
+        BeanUtils.copyProperties(user, userInfo, "password");
         return userInfo;
     }
 }

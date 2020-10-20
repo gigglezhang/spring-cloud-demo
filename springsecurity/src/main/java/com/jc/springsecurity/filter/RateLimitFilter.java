@@ -1,6 +1,7 @@
 package com.jc.springsecurity.filter;
 
 import com.google.common.util.concurrent.RateLimiter;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -14,7 +15,8 @@ import java.io.IOException;
 /**
  * @author jincheng.zhang
  */
-//@Component
+@Order(1)
+@Component
 public class RateLimitFilter extends OncePerRequestFilter {
     private RateLimiter rateLimiter = RateLimiter.create(1);
     @Override

@@ -2,7 +2,11 @@ package com.jc.springsecurity.service;
 
 import com.jc.springsecurity.jpa.UserRepository;
 import com.jc.springsecurity.pojo.entity.User;
+import com.lambdaworks.crypto.SCrypt;
+import com.lambdaworks.crypto.SCryptUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -16,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
+        user.setPassword(SCryptUtil.scrypt(user.getPassword(),16,8,1));
         return userRepository.save(user);
     }
 
