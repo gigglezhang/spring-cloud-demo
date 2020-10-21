@@ -1,6 +1,7 @@
 package com.jc.springsecurity.filter;
 
 import com.google.common.util.concurrent.RateLimiter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -17,10 +18,12 @@ import java.io.IOException;
  */
 @Order(1)
 @Component
+@Slf4j
 public class RateLimitFilter extends OncePerRequestFilter {
     private RateLimiter rateLimiter = RateLimiter.create(1);
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        log.warn("限流 order is 1");
         if(rateLimiter.tryAcquire()){
             filterChain.doFilter(request,response);
         }else {

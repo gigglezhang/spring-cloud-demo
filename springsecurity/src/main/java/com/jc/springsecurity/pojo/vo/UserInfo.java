@@ -22,6 +22,7 @@ public class UserInfo {
     private String password;
     private String age;
     private String description;
+    private String permission;
 
     public static UserInfo build(User user){
         if(user == null){

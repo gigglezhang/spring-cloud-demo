@@ -1,6 +1,7 @@
 package com.jc.springsecurity.pojo.entity;
 
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -20,4 +21,18 @@ public class User {
     private String password;
     private String age;
     private String description;
+    /**
+     *  simpleAcl  r/w  or rw
+     */
+    private String permission;
+
+    public boolean hasPermission(String method){
+        boolean res = false;
+        if(StringUtils.equalsIgnoreCase("get", method) ){
+            res = StringUtils.contains(permission,"r");
+        }else{
+            res = StringUtils.contains(permission,"r");
+        }
+        return res;
+    }
 }

@@ -3,7 +3,6 @@ package com.jc.springsecurity.controller;
 import com.jc.springsecurity.pojo.entity.User;
 import com.jc.springsecurity.pojo.vo.UserInfo;
 import com.jc.springsecurity.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -23,13 +23,12 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/{id}")
-    public UserInfo getUserInfo(@PathVariable Long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        User user = (User) request.getAttribute("user");
+    public UserInfo getUserInfo(@PathVariable Long id, HttpServletRequest request) throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
         if(user != null && id.equals(user.getId())){
             user = userService.findById(id);
-        }else{
-            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
-            response.getWriter().write("authentication failure");
+        }else {
+            throw new RuntimeException("only can search self");
         }
         return UserInfo.build(user);
     }
@@ -53,5 +52,23 @@ public class UserController {
         return UserInfo.build(userService.createUser(user));
     }
 
+    @PostMapping("/login")
+    public void login(@Validated UserInfo userInfo, HttpServletRequest request){
+        User user = userService.login(userInfo.getUsername(),userInfo.getPassword());
+        // simple session fixation attack
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+        // 创建新的--每次登入都返回新的sessionID
+        request.getSession().setAttribute("user", user);
+    }
 
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if(session != null){
+            session.invalidate();
+        }
+    }
 }

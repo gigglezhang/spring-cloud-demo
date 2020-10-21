@@ -38,4 +38,14 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public User login(String username,String password) {
+        User user = userRepository.findByUsername(username);
+        if(user != null && SCryptUtil.check(password, user.getPassword())){
+            // 有认证的加入request,方便进入下一步
+            return user;
+        }
+        return null;
+    }
 }
